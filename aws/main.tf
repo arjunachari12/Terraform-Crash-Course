@@ -1,15 +1,13 @@
 provider "aws" {
   region     = "us-east-1"
-  access_key = "AKIAJTTSSUF2PB6HDCCA"
-  secret_key = "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"
+  access_key = "AKIAJJ6MF6RXWJGKQXFA"
+  secret_key = "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"
 }
 
 variable "subnet_prefix" {
   description = "cidr block for the subnet"
 
 }
-
-
 
 resource "aws_vpc" "prod-vpc" {
   cidr_block = "10.0.0.0/16"
@@ -25,6 +23,16 @@ resource "aws_subnet" "subnet-1" {
 
   tags = {
     Name = var.subnet_prefix[0].name
+  }
+}
+
+resource "aws_s3_bucket" "b" {
+  bucket = "my-tf-test-bucket-arjun"
+  acl    = "private"
+
+  tags = {
+    Name        = "My bucket"
+    Environment = "Dev"
   }
 }
 
